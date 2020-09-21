@@ -87,7 +87,7 @@ const toggleLike = (book) => {
     book.users.push({
       "id": 1,
       "username": "pouros" 
-    })
+    });
     fetch(`http://localhost:3000/books/${book.id}`, {
       method: "PATCH",
       headers: {
