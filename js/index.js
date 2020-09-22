@@ -4,9 +4,14 @@ document.addEventListener("DOMContentLoaded", function() {
     
     
     const fetchBooks = () => {
-        fetch(baseUrl)
-        .then(response => response.json())
-        .then(books => renderBooks(books))
+        smolz().then(books => renderBooks(books));
+        
+        // .then(books => renderBooks(books))
+        
+    }
+
+    const smolz = () => {
+        return fetch(baseUrl).then(response => response.json())
     }
 
     const renderBooks = booksArray => {
@@ -135,7 +140,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 removeBook()
                 fetchBookInfo(e.target.dataset.id)
             } else if(e.target.matches(".like-button")){
-                console.log(e.target)
                 updateUsers(e.target)
                 
             }
