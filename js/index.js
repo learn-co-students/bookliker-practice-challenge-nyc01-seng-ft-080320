@@ -87,7 +87,7 @@ const clickHandler = () => {
             showBookInfo(e.target)
         } else if (e.target.matches('#unliked')){
             addUserToDbAndDomUponLikingBook(e.target)
-        }else if(e.target.matches('#liked')){
+        } else if(e.target.matches('#liked')){
             removeUserFromDbAndDomUponUnlikingBook(e.target)
         }
     })
@@ -103,7 +103,7 @@ const removeUserFromDbAndDomUponUnlikingBook = el => {
             users 
         }
       
-        fetch(url+bookId, patchOptions(bookUsers))
+        fetch(url+bookId, patchRequestOptions(bookUsers))
         .then(response => response.json())
         .then(book => {
             const bookPagesContainer = document.querySelector('#show-panel')
@@ -132,7 +132,7 @@ const addUserToDbAndDomUponLikingBook = el => {
             users
         }
        
-        fetch(url+bookId, patchOptions(bookUsers))
+        fetch(url+bookId, patchRequestOptions(bookUsers))
         .then(response => response.json())
         .then(book => {
             const bookPagesContainer = document.querySelector('#show-panel')
@@ -150,7 +150,7 @@ const addUserToDbAndDomUponLikingBook = el => {
     })
 }
 
-const patchOptions = obj => {
+const patchRequestOptions = obj => {
     const options = {
         method: "PATCH",
         headers: {
