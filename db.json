@@ -9,12 +9,8 @@
       "img_url": "https://books.google.com/books/content?id=3S8Rwr-iBdoC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "users": [
         {
-          "id": 2,
+          "id": "2",
           "username": "auer"
-        },
-        {
-          "id": 8,
-          "username": "maverick"
         }
       ]
     },
@@ -53,12 +49,12 @@
       "img_url": "https://books.google.com/books/content?id=nHlbDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "users": [
         {
-          "id": 8,
-          "username": "maverick"
+          "id": "9",
+          "username": "alex"
         },
         {
-          "id": 9,
-          "username": "alex"
+          "id": "1",
+          "username": "pouros"
         }
       ]
     },
@@ -128,12 +124,16 @@
       "img_url": "http://books.google.com/books/content?id=FLFoDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "users": [
         {
-          "id": 3,
+          "id": "3",
           "username": "marvin"
         },
         {
-          "id": 5,
+          "id": "5",
           "username": "feels-like-summer"
+        },
+        {
+          "id": "1",
+          "username": "pouros"
         }
       ]
     },
@@ -168,16 +168,20 @@
       "img_url": "http://books.google.com/books/content?id=8thMLkahggcC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "users": [
         {
-          "id": 8,
+          "id": "8",
           "username": "maverick"
         },
         {
-          "id": 6,
+          "id": "6",
           "username": "steuber"
         },
         {
-          "id": 5,
+          "id": "5",
           "username": "feels-like-summer"
+        },
+        {
+          "id": "1",
+          "username": "pouros"
         }
       ]
     },
@@ -190,11 +194,11 @@
       "img_url": "http://books.google.com/books/content?id=fc8PDgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "users": [
         {
-          "id": 8,
+          "id": "8",
           "username": "maverick"
         },
         {
-          "id": 10,
+          "id": "10",
           "username": "macejkovic"
         }
       ]
@@ -208,11 +212,11 @@
       "img_url": "http://books.google.com/books/content?id=nEcsDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "users": [
         {
-          "id": 8,
+          "id": "8",
           "username": "maverick"
         },
         {
-          "id": 10,
+          "id": "10",
           "username": "macejkovic"
         }
       ]
