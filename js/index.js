@@ -77,15 +77,17 @@ const likeBook = (bookDiv) => {
 
     const options = {
         method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({
             users: arrayOfUsers
         })
     }
-    
     console.log(options)
-    // fetch(BASE_URL + bookId, options)
-    // .then(resp => resp.json())
-    // .then(data => console.log(data))
+    fetch(BASE_URL + bookId, options)
+    .then(resp => resp.json())
+    .then(data => renderBook(data))
 }
 
 const getUsers = (bookDiv) => {
