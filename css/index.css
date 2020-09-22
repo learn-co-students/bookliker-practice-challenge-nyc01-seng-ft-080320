@@ -2,3 +2,31 @@ body {
 	display: grid;
 	grid-template-columns: 2fr 8fr
 }
+
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 200px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    border-right-style: solid;
+    border-right-color: grey;
+    border-right-width: 3px;
+    top: 0; /* Stay at the top */
+    left: 0;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+  }
+
+  .links {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 12px;
+    color: #818181;
+    display: block;
+  }
+
+  .main {
+    margin-left: 200px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+    width: 500px
+  }
