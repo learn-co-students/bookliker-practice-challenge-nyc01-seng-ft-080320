@@ -40,7 +40,12 @@ document.addEventListener("DOMContentLoaded", function() {
         const likeButton = document.createElement('button');
         likeButton.className = "like-button"
         likeButton.dataset.id = bookObj.id
-        likeButton.innerText = "👍"
+    
+        if (bookObj.users.find(({ id }) => id === "1")) {
+            likeButton.textContent = "👎"} else {
+                likeButton.textContent = "👍"
+            }
+    
         bookDiv.innerHTML = `
         <img src=${bookObj.img_url}>
         <h3>${bookObj.title}</h3>
@@ -90,10 +95,17 @@ document.addEventListener("DOMContentLoaded", function() {
         const bookId = bookLikeButton.dataset.id
         const userList = document.querySelector(".user-list");
         const userLis = userList.children;
-        const previousUserObjects = userObj(userLis);
-        const myUser = {"id":1, "username":"pouros"}
-        previousUserObjects.push(myUser)
+        let previousUserObjects = userObj(userLis);
+        const myUser = {"id": "1", "username":"pouros"}
+        // console.log(previousUserObjects)
         
+        //  console.log(myUser)
+        if(previousUserObjects.find(user => user.id === myUser.id)){
+            previousUserObjects = previousUserObjects.filter(user => {return user.id !== myUser.id});
+        } else {
+            previousUserObjects.push(myUser);
+        }
+
         const options = {
             method: "PATCH",
             headers: {
