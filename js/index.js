@@ -88,41 +88,44 @@ const clickHandler = () => {
         } else if (e.target.matches('#unliked')){
             addUserToDbAndDomUponLikingBook(e.target)
         }else if(e.target.matches('#liked')){
-            const bookId = e.target.parentElement.dataset.id
-            getUsersFromBook(bookId)
-            .then(users => {
-                
-                users.pop()
-                const bookUsers = {
-                    users 
-                }
-                const options = {
-                    method: "PATCH",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accepts": "appication/json"
-                    },
-                    body: JSON.stringify(bookUsers)
-                }
-                fetch(url+bookId, options)
-                .then(response => response.json())
-                .then(book => {
-                    const bookPagesContainer = document.querySelector('#show-panel')
-                const matchingBookDiv = bookPagesContainer.querySelector(`[data-id ='${book.id}']`)
-                const bookUl = matchingBookDiv.querySelector('ul')
-                bookUl.querySelector('li:last-child').remove()
-
-                
-                const likeButton = matchingBookDiv.querySelector('button')
-                console.log(likeButton)
-                likeButton.innerText = "LIKE"
-                likeButton.id = "unliked"
-
-
-                })
-
-            })
+            removeUserFromDbAndDomUponUnlikingBook(e.target)
         }
+    })
+}
+
+const removeUserFromDbAndDomUponUnlikingBook = el => {
+    const bookId = el.parentElement.dataset.id
+    getUsersFromBook(bookId)
+    .then(users => {
+        
+        users.pop()
+        const bookUsers = {
+            users 
+        }
+        const options = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accepts": "appication/json"
+            },
+            body: JSON.stringify(bookUsers)
+        }
+        fetch(url+bookId, options)
+        .then(response => response.json())
+        .then(book => {
+            const bookPagesContainer = document.querySelector('#show-panel')
+        const matchingBookDiv = bookPagesContainer.querySelector(`[data-id ='${book.id}']`)
+        const bookUl = matchingBookDiv.querySelector('ul')
+        bookUl.querySelector('li:last-child').remove()
+
+        
+        const likeButton = matchingBookDiv.querySelector('button')
+        likeButton.innerText = "LIKE"
+        likeButton.id = "unliked"
+
+
+        })
+
     })
 }
 
