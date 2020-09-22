@@ -74,23 +74,26 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     const userObj = userArray => {
-       let previousUsers = []
+    let previousUsers = []
         for(const user of userArray){
-            const previousUsers = {
-                "username": user.innerText,
-                "id": user.dataset.id
+            const previousUser = {
+                "id": user.dataset.id,
+                "username": user.innerText
             }
-            previousUsers.push(user);
+            previousUsers.push(previousUser);
         }
-        return previousUsers;
+        return previousUsers
     }
+    
 
     const updateUsers = bookLikeButton => {
         const bookId = bookLikeButton.dataset.id
         const userList = document.querySelector(".user-list");
         const userLis = userList.children;
-        userObj(userLis)
-
+        const previousUserObjects = userObj(userLis);
+        const myUser = {"id":1, "username":"pouros"}
+        previousUserObjects.push(myUser)
+        
         const options = {
             method: "PATCH",
             headers: {
@@ -99,10 +102,17 @@ document.addEventListener("DOMContentLoaded", function() {
             },
             body: JSON.stringify({
                 
+                "users": previousUserObjects
+                // users: newUserObjects
             })
         }
 
-        fetch(baseurl + bookId, options)
+        fetch(baseUrl + bookId, options)
+        .then(response => response.json())
+        .then(data => {
+            removeBook()
+            renderBookInfo(data)
+        })
     }
 
 
@@ -114,6 +124,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 fetchBookInfo(e.target.dataset.id)
             } else if(e.target.matches(".like-button")){
                 console.log(e.target)
+                updateUsers(e.target)
+                
             }
                 
             
