@@ -46,7 +46,7 @@ const renderBookPage = book => {
         <h3>${book.subtitle}</h3>
         <h3>${book.author}</h3>
         <p>${book.description}</p>
-        <button class="like-button">${buttonContent(book)}</button>
+        <button class="like-button">${buttonContentForLikeButton(book)}</button>
 
     `
     showPanel.append(bookDiv)
@@ -72,7 +72,7 @@ const addUsersWhoLike = book => {
     return ul
 }
 
-const buttonContent = book => {
+const buttonContentForLikeButton = book => {
     for(const user of book.users){
         if(user.id === 1){
             return "UNLIKE"
@@ -110,15 +110,11 @@ const removeUserFromDbAndDomUponUnlikingBook = el => {
             const matchingBookDiv = bookPagesContainer.querySelector(`[data-id ='${book.id}']`)
             const bookUl = matchingBookDiv.querySelector('ul')
             bookUl.querySelector('li:last-child').remove()
-
             
             const likeButton = matchingBookDiv.querySelector('button')
             likeButton.innerText = "LIKE"
             likeButton.id = "unliked"
-
-
         })
-
     })
 }
 
@@ -185,26 +181,6 @@ const getUsersFromBook = bookId => {
 
 getBooks()
 clickHandler()
-// buttonContent({
-//     "id": 1,
-//     "title": "Grapefruit",
-//     "subtitle": "A book of Instruction and Drawings.",
-//     "description": "Back in print for the first time in nearly thirty years, here is Yoko Ono's whimsical, delightful, subversive, startling book of instructions for art and for life. 'Burn this book after you've read it.' -- Yoko 'A dream you dream alone may be a dream, but a dream two people dream together is a reality. This is the greatest book I've ever burned.' -- John",
-//     "author": "Yoko Ono",
-//     img_url: "https://books.google.com/books/content?id=3S8Rwr-iBdoC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-//     users: [
-//     {
-//     id: 2,
-//     username: "auer"
-//     },
-//     {
-//     id: 1,
-//     username: "maverick"
-//     }
-//     ]
-//     })
-
 });
 
 
-//create all books then hide and re render based on click
