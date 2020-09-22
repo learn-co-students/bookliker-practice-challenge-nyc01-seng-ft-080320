@@ -11,14 +11,12 @@ const getBooks = () => {
 
 }
 
-
 const renderBooksBar = books => {
     for(const book of books){
         renderBookBar(book)
     }
 
 }
-
 
 const renderBookBar = book => {
     const list = document.querySelector('#list')
@@ -53,6 +51,11 @@ const renderBookPage = book => {
     `
     showPanel.append(bookDiv)
     const button = bookDiv.querySelector('button')
+    if (button.innerText === "LIKE"){
+        button.id = "unliked"
+    } else if (button.innerText === "UNLIKE"){
+        button.id = "liked"
+    }
     bookDiv.insertBefore(addUsersWhoLike(book), button )
 }
 
@@ -81,15 +84,7 @@ const buttonContent = book => {
 const clickHandler = () => {
     document.addEventListener('click', e => {
         if(e.target.matches('.links')){
-            const bookLink = e.target
-            const bookId = bookLink.dataset.id
-            const bookPagesContainer = document.querySelector('#show-panel')
-            const booksDiv = document.querySelectorAll('.book-page')
-            for(const book of booksDiv){
-                book.style.display = 'none'
-            }
-            const matchingBookDiv = bookPagesContainer.querySelector(`[data-id ='${bookId}']`)
-            matchingBookDiv.style.display = "block"
+            showBookInfo(e.target)
         } else if (e.target.matches('.like-button')){
             if(e.target.innerText === "LIKE"){
             const bookId = e.target.parentElement.dataset.id
@@ -104,7 +99,6 @@ const clickHandler = () => {
                 const bookUsers = {
                     users
                 }
-
                 const options = {
                     method: "PATCH",
                     headers: {
@@ -122,12 +116,10 @@ const clickHandler = () => {
                     const bookUl = matchingBookDiv.querySelector('ul')
                     const likeLi = document.createElement('li')
                     const lastUser = book.users.pop()
-                    console.log(lastUser)
                     likeLi.textContent = lastUser.username
                     bookUl.append(likeLi)
                     
                     const likeButton = matchingBookDiv.querySelector('button')
-                    console.log(likeButton)
                     likeButton.innerText = "UNLIKE"
                 })
             })
@@ -169,18 +161,22 @@ const clickHandler = () => {
                 
             }
             
-           
-            // fetch(url+bookId)
-            // .then(response => response.json())
-            // .then(book => {
-            //     const currentBook = book.users
-            //     return currentBook
-            // })
         }
 
     })
 }
 
+const showBookInfo = el => {
+    const bookLink = el
+    const bookId = bookLink.dataset.id
+    const bookPagesContainer = document.querySelector('#show-panel')
+    const booksDiv = document.querySelectorAll('.book-page')
+    for(const book of booksDiv){
+        book.style.display = 'none'
+    }
+    const matchingBookDiv = bookPagesContainer.querySelector(`[data-id ='${bookId}']`)
+    matchingBookDiv.style.display = "block"
+}
 const getUsersFromBook = bookId => {
     return fetch(url+bookId)
     .then(response => response.json())
