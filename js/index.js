@@ -86,45 +86,7 @@ const clickHandler = () => {
         if(e.target.matches('.links')){
             showBookInfo(e.target)
         } else if (e.target.matches('#unliked')){
-            const bookId = e.target.parentElement.dataset.id
-
-            getUsersFromBook(bookId)
-            .then(users => {
-                const newUser = {
-                    id: 1,
-                    username: 'pouros'
-                }
-                users.push(newUser)
-                const bookUsers = {
-                    users
-                }
-                const options = {
-                    method: "PATCH",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accepts": "appication/json"
-                    },
-                    body: JSON.stringify(bookUsers)
-                }
-
-                fetch(url+bookId, options)
-                .then(response => response.json())
-                .then(book => {
-                    const bookPagesContainer = document.querySelector('#show-panel')
-                    const matchingBookDiv = bookPagesContainer.querySelector(`[data-id ='${book.id}']`)
-                    const bookUl = matchingBookDiv.querySelector('ul')
-                    const likeLi = document.createElement('li')
-                    const lastUser = book.users.pop()
-                    likeLi.textContent = lastUser.username
-                    bookUl.append(likeLi)
-                    
-                    const likeButton = matchingBookDiv.querySelector('button')
-                    likeButton.innerText = "UNLIKE"
-                    likeButton.id = "liked"
-                })
-            })
-             
-            
+            addUserToDbAndDomUponLikingBook(e.target)
         }else if(e.target.matches('#liked')){
             const bookId = e.target.parentElement.dataset.id
             getUsersFromBook(bookId)
@@ -160,10 +122,47 @@ const clickHandler = () => {
                 })
 
             })
+        }
+    })
+}
 
-            
+const addUserToDbAndDomUponLikingBook = el => {
+    const bookId = el.parentElement.dataset.id
+
+    getUsersFromBook(bookId)
+    .then(users => {
+        const newUser = {
+            id: 1,
+            username: 'pouros'
+        }
+        users.push(newUser)
+        const bookUsers = {
+            users
+        }
+        const options = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accepts": "appication/json"
+            },
+            body: JSON.stringify(bookUsers)
         }
 
+        fetch(url+bookId, options)
+        .then(response => response.json())
+        .then(book => {
+            const bookPagesContainer = document.querySelector('#show-panel')
+            const matchingBookDiv = bookPagesContainer.querySelector(`[data-id ='${book.id}']`)
+            const bookUl = matchingBookDiv.querySelector('ul')
+            const likeLi = document.createElement('li')
+            const lastUser = book.users.pop()
+            likeLi.textContent = lastUser.username
+            bookUl.append(likeLi)
+            
+            const likeButton = matchingBookDiv.querySelector('button')
+            likeButton.innerText = "UNLIKE"
+            likeButton.id = "liked"
+        })
     })
 }
 
