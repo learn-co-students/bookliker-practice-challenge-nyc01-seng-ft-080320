@@ -102,26 +102,19 @@ const removeUserFromDbAndDomUponUnlikingBook = el => {
         const bookUsers = {
             users 
         }
-        const options = {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "appication/json"
-            },
-            body: JSON.stringify(bookUsers)
-        }
-        fetch(url+bookId, options)
+      
+        fetch(url+bookId, patchOptions(bookUsers))
         .then(response => response.json())
         .then(book => {
             const bookPagesContainer = document.querySelector('#show-panel')
-        const matchingBookDiv = bookPagesContainer.querySelector(`[data-id ='${book.id}']`)
-        const bookUl = matchingBookDiv.querySelector('ul')
-        bookUl.querySelector('li:last-child').remove()
+            const matchingBookDiv = bookPagesContainer.querySelector(`[data-id ='${book.id}']`)
+            const bookUl = matchingBookDiv.querySelector('ul')
+            bookUl.querySelector('li:last-child').remove()
 
-        
-        const likeButton = matchingBookDiv.querySelector('button')
-        likeButton.innerText = "LIKE"
-        likeButton.id = "unliked"
+            
+            const likeButton = matchingBookDiv.querySelector('button')
+            likeButton.innerText = "LIKE"
+            likeButton.id = "unliked"
 
 
         })
@@ -142,16 +135,8 @@ const addUserToDbAndDomUponLikingBook = el => {
         const bookUsers = {
             users
         }
-        const options = {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "appication/json"
-            },
-            body: JSON.stringify(bookUsers)
-        }
-
-        fetch(url+bookId, options)
+       
+        fetch(url+bookId, patchOptions(bookUsers))
         .then(response => response.json())
         .then(book => {
             const bookPagesContainer = document.querySelector('#show-panel')
@@ -167,6 +152,18 @@ const addUserToDbAndDomUponLikingBook = el => {
             likeButton.id = "liked"
         })
     })
+}
+
+const patchOptions = obj => {
+    const options = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accepts": "appication/json"
+        },
+        body: JSON.stringify(obj)
+    }
+    return options
 }
 
 const showBookInfo = el => {
