@@ -16,7 +16,8 @@
           "id": 8,
           "username": "maverick"
         }
-      ]
+      ],
+      "name": "Vincent"
     },
     {
       "id": 2,
@@ -135,7 +136,8 @@
           "id": 5,
           "username": "feels-like-summer"
         }
-      ]
+      ],
+      "name": "Vincent"
     },
     {
       "id": 8,
@@ -157,7 +159,8 @@
           "id": 2,
           "username": "auer"
         }
-      ]
+      ],
+      "name": "Vincent"
     },
     {
       "id": 9,
@@ -215,7 +218,8 @@
           "id": 10,
           "username": "macejkovic"
         }
-      ]
+      ],
+      "name": "Vincent"
     }
   ],
   "users": [
