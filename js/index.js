@@ -85,8 +85,7 @@ const clickHandler = () => {
     document.addEventListener('click', e => {
         if(e.target.matches('.links')){
             showBookInfo(e.target)
-        } else if (e.target.matches('.like-button')){
-            if(e.target.innerText === "LIKE"){
+        } else if (e.target.matches('#unliked')){
             const bookId = e.target.parentElement.dataset.id
 
             getUsersFromBook(bookId)
@@ -121,45 +120,47 @@ const clickHandler = () => {
                     
                     const likeButton = matchingBookDiv.querySelector('button')
                     likeButton.innerText = "UNLIKE"
+                    likeButton.id = "liked"
                 })
             })
-            } else if(e.target.innerText === "UNLIKE"){
-                const bookId = e.target.parentElement.dataset.id
-                getUsersFromBook(bookId)
-                .then(users => {
-                    
-                    users.pop()
-                    const bookUsers = {
-                        users 
-                    }
-                    const options = {
-                        method: "PATCH",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Accepts": "appication/json"
-                        },
-                        body: JSON.stringify(bookUsers)
-                    }
-                    fetch(url+bookId, options)
-                    .then(response => response.json())
-                    .then(book => {
-                        const bookPagesContainer = document.querySelector('#show-panel')
-                    const matchingBookDiv = bookPagesContainer.querySelector(`[data-id ='${book.id}']`)
-                    const bookUl = matchingBookDiv.querySelector('ul')
-                    bookUl.querySelector('li:last-child').remove()
+             
+            
+        }else if(e.target.matches('#liked')){
+            const bookId = e.target.parentElement.dataset.id
+            getUsersFromBook(bookId)
+            .then(users => {
+                
+                users.pop()
+                const bookUsers = {
+                    users 
+                }
+                const options = {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accepts": "appication/json"
+                    },
+                    body: JSON.stringify(bookUsers)
+                }
+                fetch(url+bookId, options)
+                .then(response => response.json())
+                .then(book => {
+                    const bookPagesContainer = document.querySelector('#show-panel')
+                const matchingBookDiv = bookPagesContainer.querySelector(`[data-id ='${book.id}']`)
+                const bookUl = matchingBookDiv.querySelector('ul')
+                bookUl.querySelector('li:last-child').remove()
 
-                    
-                    const likeButton = matchingBookDiv.querySelector('button')
-                    console.log(likeButton)
-                    likeButton.innerText = "LIKE"
+                
+                const likeButton = matchingBookDiv.querySelector('button')
+                console.log(likeButton)
+                likeButton.innerText = "LIKE"
+                likeButton.id = "unliked"
 
-
-                    })
 
                 })
 
-                
-            }
+            })
+
             
         }
 
