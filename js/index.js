@@ -26,6 +26,7 @@ const likeBook = (e) => {
     }
     fetch(baseURL + 'books/' + 1, config).then(resp => resp.json()).then((data) => {
         console.log(data);
+        //change button here
     });
 }
 const hideBooksPanel = () => {
@@ -47,17 +48,28 @@ const clickBoi = () => {
         // matching by attr
         if (e.target.matches('[data-book-id]')) {
             revealBook(e);
-        } else if (e.target.matches('button')) {
+        } else if (e.target.matches('#like-btn')) {
             likeBook(e);
+        } else if (e.target.matches('#unlike-btn')) {
+            // unlike() does not exist yet
         }
     });
 };
-
+const checkForUser = (user, collection) => {
+    for (let el of collection) {
+        console.log(el);
+        if (el.id == user.id ) return true;
+    }
+    return false
+}
 // creates  likes UL from book using book.users
 const createLikesList = (book) => {
     let ul = document.createElement('ul');
     let button = document.createElement('button')
-    button.textContent = 'Like';
+    checkForUser({"id":1, "username":"pouros"}, book.users) ? (button.textContent = 'Unlike') : (button.textContent = 'like')
+    button.textContent === 'Unlike' ? (button.id = 'unlike-btn') : (button.id = 'like-btn')
+
+
 
     for (let user of book.users) {
         let li = document.createElement('li');
